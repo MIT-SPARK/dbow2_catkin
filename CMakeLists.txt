@@ -10,15 +10,15 @@ file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 ExternalProject_Add(dbow2_src
   GIT_REPOSITORY https://github.com/dorian3d/DBoW2.git
-  GIT_TAG master
+  GIT_TAG origin/master
   GIT_PROGRESS 1
   UPDATE_COMMAND ""
   #PATCH_COMMAND ""
-  CONFIGURE_COMMAND cmake -DCMAKE_BUILD_TYPE=Release
-                          -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX}
-                          -DBUILD_Demo=Off ../dbow2_src
-  BUILD_COMMAND make
-  INSTALL_COMMAND make install
+  CONFIGURE_COMMAND cd ../dbow2_src && cmake -DCMAKE_BUILD_TYPE=Release
+                                             -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX}
+                                             -DBUILD_Demo=Off .
+  BUILD_COMMAND cd ../dbow2_src && make
+  INSTALL_COMMAND cd ../dbow2_src && make install
 )
 
 install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/DBoW2
